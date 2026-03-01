@@ -8,10 +8,13 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Custom scrollbar */
@@ -302,6 +305,30 @@ body {
     0 0 0 1px rgba(249, 115, 22, 0.4),
     0 0 20px -3px rgba(249, 115, 22, 0.15),
     0 0 40px -5px rgba(249, 115, 22, 0.06);
+}
+
+/* ===== RECIPE OPTIONS ===== */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.options-slide-in {
+  animation: slide-in 0.2s ease-out;
+}
+
+.option-dropdown {
+  animation: slide-in 0.15s ease-out;
+}
+
+.option-pill {
+  backdrop-filter: blur(8px);
 }
 
 /* ===== MARKDOWN CONTENT ===== */

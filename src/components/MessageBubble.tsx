@@ -10,17 +10,17 @@ export default function MessageBubble({ role, content }: MessageBubbleProps) {
 
   if (isUser) {
     return (
-      <div className="flex justify-end px-4 py-1.5">
-        <div className="max-w-[75%] rounded-2xl rounded-br-md bg-orange-500 text-white px-4 py-2.5 shadow-md shadow-orange-500/10">
-          <p className="whitespace-pre-wrap text-sm leading-relaxed">{content}</p>
+      <div className="flex justify-end px-3 sm:px-4 py-1.5">
+        <div className="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-br-md bg-orange-500 text-white px-3 sm:px-4 py-2 sm:py-2.5 shadow-md shadow-orange-500/10">
+          <p className="whitespace-pre-wrap text-[13px] sm:text-sm leading-relaxed">{content}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="px-4 py-1.5">
-      <div className="max-w-[85%]">
+    <div className="px-3 sm:px-4 py-1.5">
+      <div className="max-w-[95%] sm:max-w-[85%]">
         <div className="flex items-center gap-2 mb-1.5">
           <div className="w-5 h-5 rounded-md bg-linear-to-br from-orange-500 to-red-500 flex items-center justify-center text-[10px]">
             🍳
