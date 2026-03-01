@@ -1,6 +1,24 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, GenerativeModel } from "@google/generative-ai";
 
-export const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+let _genAI: GoogleGenerativeAI | null = null;
+let _model: GenerativeModel | null = null;
+
+function getGenAI() {
+  if (!_genAI) {
+    _genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+  }
+  return _genAI;
+}
+
+export function getModel() {
+  if (!_model) {
+    _model = getGenAI().getGenerativeModel({
+      model: "gemini-2.5-flash",
+      systemInstruction: SYSTEM_PROMPT,
+    });
+  }
+  return _model;
+}
 
 export const SYSTEM_PROMPT = `You are Chefify, a friendly and knowledgeable AI cooking assistant. You are passionate about food from every cuisine — Indian, Italian, Mexican, Chinese, Japanese, Thai, French, American, Middle Eastern, and beyond.
 

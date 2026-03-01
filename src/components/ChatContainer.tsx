@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import MessageList from "./MessageList";
 import ChatInput from "./ChatInput";
 import WelcomeScreen from "./WelcomeScreen";
@@ -14,9 +14,11 @@ type Message = {
 export default function ChatContainer() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const isSubmitting = useRef(false);
 
   const sendMessage = async (content: string) => {
-    if (!content.trim() || isLoading) return;
+    if (!content.trim() || isLoading || isSubmitting.current) return;
+    isSubmitting.current = true;
 
     const userMessage: Message = {
       id: crypto.randomUUID(),
@@ -44,27 +46,34 @@ export default function ChatContainer() {
         ...prev,
         { id: crypto.randomUUID(), role: "assistant", content: data.message },
       ]);
-    } catch {
+    } catch (err) {
+      const errorMsg =
+        err instanceof Error
+          ? err.message
+          : "Sorry, something went wrong. Please try again!";
       setMessages((prev) => [
         ...prev,
         {
           id: crypto.randomUUID(),
           role: "assistant",
-          content: "Sorry, something went wrong. Please try again!",
+          content: errorMsg,
         },
       ]);
     } finally {
       setIsLoading(false);
+      isSubmitting.current = false;
     }
   };
 
+  if (messages.length === 0) {
+    return (
+      <WelcomeScreen onSend={sendMessage} disabled={isLoading} />
+    );
+  }
+
   return (
     <div className="flex flex-col flex-1 min-h-0">
-      {messages.length === 0 ? (
-        <WelcomeScreen onSuggestionClick={sendMessage} />
-      ) : (
-        <MessageList messages={messages} isLoading={isLoading} />
-      )}
+      <MessageList messages={messages} isLoading={isLoading} />
       <ChatInput onSend={sendMessage} disabled={isLoading} />
     </div>
   );

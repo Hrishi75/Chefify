@@ -1,15 +1,16 @@
 export default function TypingIndicator() {
   return (
-    <div className="flex items-start gap-3 px-4 py-2">
-      <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0">
-        👨‍🍳
-      </div>
-      <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
-        <div className="flex gap-1">
-          <span className="w-2 h-2 bg-amber-400 rounded-full animate-bounce [animation-delay:0ms]" />
-          <span className="w-2 h-2 bg-amber-400 rounded-full animate-bounce [animation-delay:150ms]" />
-          <span className="w-2 h-2 bg-amber-400 rounded-full animate-bounce [animation-delay:300ms]" />
+    <div className="px-4 py-1.5">
+      <div className="flex items-center gap-2 mb-1.5">
+        <div className="w-5 h-5 rounded-md bg-linear-to-br from-orange-500 to-red-500 flex items-center justify-center text-[10px]">
+          🍳
         </div>
+        <span className="text-[11px] font-medium text-gray-400 dark:text-gray-600">Chefify</span>
+      </div>
+      <div className="flex items-center gap-1.5 py-2">
+        <span className="w-1.5 h-1.5 bg-orange-400/60 rounded-full animate-bounce [animation-delay:0ms]" />
+        <span className="w-1.5 h-1.5 bg-orange-400/60 rounded-full animate-bounce [animation-delay:150ms]" />
+        <span className="w-1.5 h-1.5 bg-orange-400/60 rounded-full animate-bounce [animation-delay:300ms]" />
       </div>
     </div>
   );
